@@ -23,8 +23,6 @@ data/
 *.csv
 *.json
 *.xml
-*.yml
-*.yaml
 *.db
 
 # Log files
@@ -63,10 +61,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Docker
-.dockerignore
-docker-compose.override.yml
-
 # Ignore backups and temporary files
 *.bak
 *.swp
@@ -77,3 +71,4 @@ docker-compose.override.yml
 
 # Exclude sensitive files
 .env.*
+!.env.example
