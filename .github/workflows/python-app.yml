@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Cache pip dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
@@ -37,6 +37,12 @@ jobs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
+
+    - name: Create .env file
+      run: |
+        echo "API_ID=${{ secrets.TELEGRAM_API_ID }}" >> .env
+        echo "API_HASH=${{ secrets.TELEGRAM_API_HASH }}" >> .env
+        echo "PHONE=${{ secrets.TELEGRAM_PHONE }}" >> .env
 
     - name: Lint with flake8
       run: pip install flake8 && flake8 telegram_exporter tests
