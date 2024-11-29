@@ -1,0 +1,79 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.env
+.venv/
+venv/
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# IDE and Editor config
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Data files
+data/
+*.sqlite3
+*.csv
+*.json
+*.xml
+*.yml
+*.yaml
+*.db
+
+# Log files
+logs/
+*.log
+*.out
+*.err
+
+# Session files
+*.session
+*.session-journal
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test cache
+.tox/
+.cache/
+.coverage
+.coverage.*
+
+# Pytest cache
+.pytest_cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Node.js files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Ignore backups and temporary files
+*.bak
+*.swp
+*.tmp
+*.temp
+*.~lock.*
+~$*
+
+# Exclude sensitive files
+.env.*
