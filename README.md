@@ -1,16 +1,38 @@
 # Telegram Exporter
 
-A Python application to export messages from Telegram and save them to a SQLite database with HTML formatting and URL extraction.
+![Build Status](https://github.com/VladimirVereshchagin/telegram_exporter/workflows/Python%20CI/CD/badge.svg)
+![Python Version](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12-blue)
+![Docker Image Size](https://img.shields.io/docker/image-size/vladimirvereschagin/telegram_exporter/latest)
+![GitHub Release](https://img.shields.io/github/v/release/VladimirVereshchagin/telegram_exporter)
 
-## Description
+[Docker Hub repository for Telegram Exporter](https://hub.docker.com/r/vladimirvereschagin/telegram_exporter)  
+[GitHub Packages for Telegram Exporter](https://github.com/VladimirVereshchagin/telegram_exporter/packages)
 
-This application uses the [Telethon](https://github.com/LonamiWebs/Telethon) library to interact with the Telegram API. It allows you to:
+## Project Description
 
-- **Export messages** from "Saved Messages" or any other chat, group, or channel.
-- **Format messages in HTML** while preserving styles.
-- **Extract URLs** from messages, including those contained in message entities (e.g., formatted links).
-- **Store messages and URLs** in a SQLite database for further use.
-- **Automatically generate `html.csv` and `html.json` files** containing the exported messages and URLs for easy analysis or external use.
+**Telegram Exporter** is a Python application designed to export and store messages from Telegram chats, groups, or channels into a SQLite database. The application supports formatting messages into HTML and automatically generates CSV and JSON files for easy data analysis and integration with other tools.
+
+The application is particularly useful for:
+
+- Archiving messages from personal or public Telegram groups.
+- Analyzing chat data with external tools like Excel, Python scripts, or web services.
+- Exporting messages for research, reporting, or integration into third-party systems.
+
+## Key Features
+
+- **Comprehensive Data Export**:
+  - Exports messages along with metadata like date, URLs, and chat IDs.
+  - Supports rich text formatting with styles like bold, italic, and underline.
+- **Automatic File Generation**:
+  - Automatically generates `html.csv` and `html.json` after every export to ensure your data is always up-to-date.
+- **SQLite Database Storage**:
+  - Efficiently stores messages with options for filtering and querying.
+- **Dockerized Deployment**:
+  - Deployable using a pre-built Docker image for easy scalability and cross-platform support.
+- **CI/CD Integration**:
+  - Automatically builds and pushes Docker images to Docker Hub upon successful tests.
+- **Cross-version Compatibility**:
+  - Supports Python 3.10, 3.11, and 3.12.
 
 ---
 
@@ -18,8 +40,9 @@ This application uses the [Telethon](https://github.com/LonamiWebs/Telethon) lib
 
 ### Prerequisites
 
-- **Python** version **3.7** to **3.12** (Python 3.13 is not supported due to deprecated modules like `imghdr`).
+- **Python** version **3.10** to **3.12** (Python 3.13 is not supported due to deprecated modules like `imghdr`).
 - **Git**
+- **Docker** (optional for containerized deployment)
 
 ### Installation Steps
 
@@ -111,19 +134,42 @@ python telegram_exporter/main.py --chat username_or_link
 
 ---
 
-### File Generation
+## Quick Start via Docker Hub
 
-During the export process, the application automatically generates two files:
+For quick deployment, use the pre-built Docker image available on Docker Hub.
 
-1. **`html.csv`**:
-   - Contains the exported messages and their URLs in a CSV format.
-   - Useful for analysis in spreadsheet software or data processing scripts.
+### Run the Container
 
-2. **`html.json`**:
-   - Contains the exported messages and their URLs in a JSON format.
-   - Ideal for integration with other systems or further programmatic processing.
+  ```bash
+  docker run -d \
+  --name telegram_exporter \
+  --env-file .env \
+  -v $(pwd)/data:/app/data \
+  vladimirvereschagin/telegram_exporter:latest
+  ```
 
-These files are updated every time the application runs and reflect the latest data.
+### Explanation
+
+- --env-file .env: Passes the .env file with API credentials to the container.
+- -v $(pwd)/data:/app/data: Mounts the local data directory to persist the SQLite database and generated files outside the container.
+
+### Access the Files
+
+After running the application, the following files will be updated in the data directory:
+
+- db.sqlite3 — SQLite database containing exported messages.
+- html.csv — CSV file with messages and URLs.
+- html.json — JSON file with messages and URLs.
+
+---
+
+## CI/CD
+
+GitHub Actions is configured to automatically test, build, and push the application to Docker Hub. The workflow includes:
+
+- Linting with flake8.
+- Running unit tests.
+- Building and pushing Docker images.
 
 ---
 
@@ -136,35 +182,25 @@ The application automatically extracts URLs from messages and saves them in the 
 
 ---
 
-## Testing
+## Running Tests Locally
 
-Run the tests:
+Run the following command to execute all tests:
 
 ```bash
 python -m unittest discover tests
 ```
 
-Ensure you are using Python versions from 3.7 to 3.12.
+For linting:
+
+```bash
+flake8 telegram_exporter tests
+```
 
 ---
 
-## Docker Usage
+## Feedback
 
-You can also run the application using Docker:
-
-1. **Build the Docker image**:
-
-   ```bash
-   docker build -t telegram_exporter .
-   ```
-
-2. **Run the Docker container**:
-
-   ```bash
-   docker run -it --env-file .env telegram_exporter --chat username_or_link
-   ```
-
-Ensure your `.env` file is correctly configured.
+If you have any questions or suggestions, please create an [issue](https://github.com/VladimirVereshchagin/telegram_exporter/issues) or [pull request](https://github.com/VladimirVereshchagin/telegram_exporter/pulls) in the project repository.
 
 ---
 
