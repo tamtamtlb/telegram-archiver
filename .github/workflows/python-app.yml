@@ -1,11 +1,12 @@
-name: Python application
+name: Python CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   build:
@@ -55,3 +56,27 @@ jobs:
         pip install coverage
         coverage run -m unittest discover tests
         coverage report
+
+    - name: Log in to DockerHub
+      if: github.ref_name == 'main' || github.ref_name == 'new-feature'
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Set up QEMU
+      if: github.ref_name == 'main' || github.ref_name == 'new-feature'
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      if: github.ref_name == 'main' || github.ref_name == 'new-feature'
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build and push Docker image
+      if: github.ref_name == 'main' || github.ref_name == 'new-feature'
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        platforms: linux/amd64,linux/arm64
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/telegram_exporter:latest
