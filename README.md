@@ -136,7 +136,8 @@ python telegram_exporter/main.py --chat username_or_link
 
 ## Quick Start via Docker Hub
 
-For quick deployment, use the pre-built Docker image available on Docker Hub.
+For quick deployment, use the pre-built Docker image available on [Docker Hub](https://hub.docker.com/r/vladimirvereschagin/telegram_exporter).
+
 
 ### Run the Container
 
@@ -163,13 +164,15 @@ After running the application, the following files will be updated in the data d
 
 ---
 
-## CI/CD
+### CI/CD
 
-GitHub Actions is configured to automatically test, build, and push the application to Docker Hub. The workflow includes:
+GitHub Actions is configured to automatically:
 
-- Linting with flake8.
-- Running unit tests.
-- Building and pushing Docker images.
+- Lint the code with `flake8`.
+- Run unit tests.
+- Build and push Docker images to:
+  - [GitHub Packages](https://github.com/VladimirVereshchagin/telegram_exporter/pkgs/container/telegram_exporter)
+  - [Docker Hub](https://hub.docker.com/r/vladimirvereschagin/telegram_exporter).
 
 ---
 
