@@ -33,7 +33,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           labels: |
-            labels: |
-              org.opencontainers.image.source=https://github.com/VladimirVereshchagin/telegram_exporter
+            org.opencontainers.image.source=https://github.com/VladimirVereshchagin/telegram_exporter
           tags: ghcr.io/vladimirvereshchagin/telegram_exporter:latest
           push: true
