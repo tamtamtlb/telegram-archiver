@@ -134,10 +134,9 @@ python telegram_exporter/main.py --chat username_or_link
 
 ---
 
-## Quick Start via Docker Hub
+## Quick Start via Docker
 
 For quick deployment, use the pre-built Docker image available on [Docker Hub](https://hub.docker.com/r/vladimirvereschagin/telegram_exporter).
-
 
 ### Run the Container
 
@@ -148,11 +147,6 @@ For quick deployment, use the pre-built Docker image available on [Docker Hub](h
   -v $(pwd)/data:/app/data \
   vladimirvereschagin/telegram_exporter:latest
   ```
-
-### Explanation
-
-- --env-file .env: Passes the .env file with API credentials to the container.
-- -v $(pwd)/data:/app/data: Mounts the local data directory to persist the SQLite database and generated files outside the container.
 
 ### Access the Files
 
