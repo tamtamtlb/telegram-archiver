@@ -72,3 +72,4 @@ yarn-error.log*
 # Exclude sensitive files
 .env.*
 !.env.example
+.env.example
